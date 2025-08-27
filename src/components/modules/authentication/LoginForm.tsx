@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -9,17 +10,47 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { useForm } from "react-hook-form";
+import { useLoginMutation } from "@/redux/features/auth/auth.api";
+import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form";
  
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { toast } from "sonner";
  
 
 export function LoginForm({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
-   const form = useForm({})
+  const navigate = useNavigate();
+  const form = useForm({
+    //! For development only
+    defaultValues: {
+      email: "rubelrana.dev@gmail.com",
+      password: "Pa$$w0rd!",
+    },
+  });
+  const [login] = useLoginMutation();
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    try {
+      const res = await login(data).unwrap();
+      console.log(res);
+      if (res.success) {
+        toast.success("Logged in successfully");
+        navigate("/");
+      }
+    } catch (err : any) {
+      console.error(err);
 
+      if (err.data.err === "Password does not match") {
+        toast.error("Invalid credentials");
+      }
+
+      if (err.data.err === "User is not verified") {
+        toast.error("Your account is not verified");
+        navigate("/verify", { state: data.email });
+      }
+    }
+  };
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <div className="flex flex-col items-center gap-2 text-center">
@@ -31,7 +62,7 @@ export function LoginForm({
       <div className="grid gap-6">
         <Form {...form}>
           <form
-        //    onSubmit={form.handleSubmit(onSubmit)}
+           onSubmit={form.handleSubmit(onSubmit)}
             className="space-y-6">
             <FormField
               control={form.control}
