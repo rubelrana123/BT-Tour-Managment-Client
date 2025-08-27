@@ -5,6 +5,7 @@ import About from "@/pages/About";
  
 import Login from "@/pages/login";
 import Register from "@/pages/register";
+import Verify from "@/pages/Verify";
 
 import { createBrowserRouter } from "react-router";
 
@@ -30,5 +31,9 @@ export const router = createBrowserRouter([
     {
     path : "/register",
     Component : Register,
-  }
+  },
+    {
+    path : "/verify",
+    Component : Verify,
+  }  
 ]);
