@@ -43,7 +43,7 @@ export function RegisterForm({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [register] = useRegisterMutation();
    const form = useForm<z.infer<typeof registerSchema>>({
     resolver : zodResolver(registerSchema),
@@ -64,7 +64,8 @@ export function RegisterForm({
     try {
       const result = await register(userInfo).unwrap();
       toast.success("Registration successful! Please check your email to verify your account.");
-        navigate("/verify");
+      //comment for not impletent verify otp in backend  
+      // navigate("/verify", { state: data.email });
      
       form.reset();
       console.log(result)

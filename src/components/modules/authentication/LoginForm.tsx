@@ -23,7 +23,7 @@ export function LoginForm({
 }: React.HTMLAttributes<HTMLDivElement>) {
   const navigate = useNavigate();
   const form = useForm({
-    //! For development only
+    //! For development onlyf
     defaultValues: {
       email: "rubelrana.dev@gmail.com",
       password: "Pa$$w0rd!",
@@ -45,10 +45,10 @@ export function LoginForm({
         toast.error("Invalid credentials");
       }
 
-      if (err.data.err === "User is not verified") {
-        toast.error("Your account is not verified");
-        navigate("/verify", { state: data.email });
-      }
+      // if (err.data.err === "User is not verified") {
+      //   toast.error("Your account is not verified");
+      //   navigate("/verify", { state: data.email });
+      // }
     }
   };
   return (
