@@ -11,6 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { useLoginMutation } from "@/redux/features/auth/auth.api";
+import config from "@/config";
  
 import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form";
  
@@ -115,6 +116,7 @@ export function LoginForm({
         </div>
 
         <Button
+        onClick={() => window.open(`${config.BASE_URL}/auth/google`)}
           type="button"
           variant="outline"
           className="w-full cursor-pointer"
