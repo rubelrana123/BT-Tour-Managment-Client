@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation } from "react-router";
 import {
   Form,
   FormControl,
@@ -32,7 +32,7 @@ const FormSchema = z.object({
 
 export default function Verify() {
  const location = useLocation();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [email] = useState(location.state);
   const [confirmed, setConfirmed] = useState(false);
   const [sendOtp] = useSendOtpMutation();
