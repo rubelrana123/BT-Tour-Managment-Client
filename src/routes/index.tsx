@@ -1,8 +1,8 @@
 import App from "@/App";
-import AdminLayout from "@/components/layout/AdminLayout";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 
 import About from "@/pages/About";
+import AddTour from "@/pages/Admin/AddTour";
 import Analytics from "@/pages/Admin/Analytics";
  
 import Login from "@/pages/login";
@@ -29,6 +29,14 @@ export const router = createBrowserRouter([
     children : [
       {path : "analytics",
         Component : Analytics
+      },
+      {
+        path : "/admin/add-tour",
+        Component : AddTour,
+      },
+            {
+        path : "/admin/add-tour-type",
+        Component : AddTour,
       }
     ]
   },
@@ -41,10 +49,7 @@ export const router = createBrowserRouter([
       }
     ]
   },
-  {
-    path : "/admin",
-    Component : AdminLayout,
-  },
+  
     {
     path : "/login",
     Component : Login,

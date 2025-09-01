@@ -5,3 +5,13 @@ export interface IResponse<T> {
   message: string;
   data: T;
 }
+
+export   interface ISliderItem {
+ 
+  title: string
+  items: { 
+    title: string
+    url: string
+    Component: React.ComponentType
+  }[]
+}
