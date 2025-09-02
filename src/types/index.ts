@@ -1,3 +1,5 @@
+import type { ComponentType } from 'react';
+
 export type { ISendOtp, IVerifyOtp, ILogin }  from './auth.type';
 export interface IResponse<T> {
   statusCode: number;
@@ -12,6 +14,7 @@ export   interface ISliderItem {
   items: { 
     title: string
     url: string
-    Component: React.ComponentType
+    Component: ComponentType;
   }[]
 }
+export type TRole = 'ADMIN' | 'Super_ADMIN' | 'USER';

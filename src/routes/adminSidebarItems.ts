@@ -1,7 +1,8 @@
-import AddTour from "@/pages/Admin/AddTour";
-import Analytics from "@/pages/Admin/Analytics";
+import AddTourType from "@/pages/Admin/AddTourType";
 import type { ISliderItem } from "@/types";
-
+import { lazy } from "react";
+const Analytics = lazy(() => import('@/pages/Admin/Analytics'));
+const AddTour = lazy(() => import('@/pages/Admin/AddTour'));
 export const adminSidebarItems : ISliderItem[] = [
   {
     title: "Dashboard",
@@ -19,7 +20,7 @@ export const adminSidebarItems : ISliderItem[] = [
       {
         title: "Add Tour Type",
         url: "/admin/add-tour-type",
-        Component: AddTour,
+        Component: AddTourType,
       },
 
       {
