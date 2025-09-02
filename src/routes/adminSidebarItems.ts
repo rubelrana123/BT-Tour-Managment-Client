@@ -1,7 +1,8 @@
 import AddTour from "@/pages/Admin/AddTour";
 import Analytics from "@/pages/Admin/Analytics";
+import type { ISliderItem } from "@/types";
 
-export const adminSidebarItems = [
+export const adminSidebarItems : ISliderItem[] = [
   {
     title: "Dashboard",
     items: [

@@ -2,15 +2,15 @@ import App from "@/App";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 
 import About from "@/pages/About";
-import AddTour from "@/pages/Admin/AddTour";
-import Analytics from "@/pages/Admin/Analytics";
- 
 import Login from "@/pages/login";
 import Register from "@/pages/register";
-import Booking from "@/pages/User/Booking";
+ 
 import Verify from "@/pages/Verify";
+import generateRoute from "@/utils/generateRoute";
 
 import { createBrowserRouter } from "react-router";
+import { adminSidebarItems } from "./adminSidebarItems";
+import { userSidebarItems } from "./userSlideBarItems";
 
 export const router = createBrowserRouter([
   {
@@ -24,42 +24,26 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path : "/admin",
-    Component : DashboardLayout,
-    children : [
-      {path : "analytics",
-        Component : Analytics
-      },
-      {
-        path : "/admin/add-tour",
-        Component : AddTour,
-      },
-            {
-        path : "/admin/add-tour-type",
-        Component : AddTour,
-      }
-    ]
+    path: "/admin",
+    Component: DashboardLayout,
+    children: [...generateRoute(adminSidebarItems)],
   },
-    {
-    path : "/user",
-    Component : DashboardLayout,
-    children : [
-      {path : "bookings",
-        Component : Booking
-      }
-    ]
+  {
+    path: "/user",
+    Component: DashboardLayout,
+    children: [...generateRoute(userSidebarItems)],
   },
-  
-    {
-    path : "/login",
-    Component : Login,
+
+  {
+    path: "/login",
+    Component: Login,
   },
-    {
-    path : "/register",
-    Component : Register,
+  {
+    path: "/register",
+    Component: Register,
   },
-    {
-    path : "/verify",
-    Component : Verify,
-  }  
+  {
+    path: "/verify",
+    Component: Verify,
+  },
 ]);
