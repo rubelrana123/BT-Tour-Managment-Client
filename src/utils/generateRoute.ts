@@ -1,8 +1,9 @@
 import type { ISliderItem } from "@/types";
 
- 
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function generateRoute(sidebarItems : ISliderItem)  {
- return sidebarItems;
+export default function generateRoute(sidebarItems: ISliderItem[]) {
+  return sidebarItems.flatMap((section) =>
+    section.items.map((item) => {
+      return { path: item.url, Component: item.Component };
+    })
+  );
 }
