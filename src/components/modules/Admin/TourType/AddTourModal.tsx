@@ -3,7 +3,6 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
- 
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -19,7 +18,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useAddTourTypeMutation } from "@/redux/features/tour/tour.api";
- 
+
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -28,7 +27,7 @@ export function AddTourTypeModal() {
   const [addTourType] = useAddTourTypeMutation();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onSubmit = async (data : any) => {
+  const onSubmit = async (data: any) => {
     const res = await addTourType({ name: data.name }).unwrap();
     if (res.success) {
       toast.success("Tour Type Added");
@@ -71,9 +70,12 @@ export function AddTourTypeModal() {
             <DialogClose asChild>
               <Button variant="outline">Cancel</Button>
             </DialogClose>
-            <Button type="submit" form="add-tour-type">
-              Save changes
-            </Button>
+            <DialogClose asChild>
+              <Button type="submit" form="add-tour-type">
+                Save
+              </Button>
+            </DialogClose>
+            
           </DialogFooter>
         </DialogContent>
       </form>
