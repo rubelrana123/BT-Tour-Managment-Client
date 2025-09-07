@@ -1,3 +1,4 @@
+import AddDivision from "@/pages/Admin/AddDivision";
 import AddTourType from "@/pages/Admin/AddTourType";
 import type { ISliderItem } from "@/types";
 import { lazy } from "react";
@@ -27,6 +28,11 @@ export const adminSidebarItems : ISliderItem[] = [
         title: "Add Tour",
         url: "/admin/add-tour",
         Component: AddTour,
+      },
+            {
+        title: "Add Division",
+        url: "/admin/add-division",
+        Component: AddDivision,
       },
     ],
   },

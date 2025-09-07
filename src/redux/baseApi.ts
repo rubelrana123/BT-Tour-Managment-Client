@@ -10,7 +10,7 @@ export const baseApi = createApi({
   //   baseUrl : 'https://localhost:5000/api/v1',
   //   credentials : 'include',
   // }),
-  tagTypes: ["USER", "TOUR"],
+  tagTypes: ["USER", "TOUR","DIVISION"],
   endpoints: ( ) => ({
  
   }),
