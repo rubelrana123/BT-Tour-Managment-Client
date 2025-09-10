@@ -102,7 +102,7 @@ export function AddDivisionModal() {
 
           {/* <SingleImageUploader onChange={setImage} /> */}
         </Form>
-        {/* dialog footer */}
+        {/* dialog footer  here*/}
         <DialogFooter>
           <DialogClose asChild>
             <Button variant="outline">Cancel</Button>
