@@ -1,4 +1,4 @@
-// import SingleImageUploader from "@/components/SingleImageUploader";
+ 
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -24,6 +24,7 @@ import { useForm } from "react-hook-form";
  
 import { useAddDivisionMutation } from "@/redux/features/division/division.api";
 import { toast } from "sonner";
+import SingleImageUploader from "@/components/SingleImageUploader";
 
 export function AddDivisionModal() {
   const [open, setOpen] = useState(false);
@@ -39,17 +40,18 @@ export function AddDivisionModal() {
     },
   });
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data :{ name: string; description: string }) => {
     const formData = new FormData();
-
+  console.log(data)
     formData.append("data", JSON.stringify(data));
     formData.append("file", image as File);
 
-    // console.log(formData.get("data"));
-    // console.log(formData.get("file"));
+    console.log(formData.get("data"));
+    console.log(formData.get("file"));
 
     try {
-      const res = await addDivision(formData).unwrap();
+     const res = await addDivision(formData).unwrap();
+     console.log(res)
       toast.success("Division Added");
       setOpen(false);
     } catch (err) {
@@ -100,14 +102,16 @@ export function AddDivisionModal() {
             />
           </form>
 
-          {/* <SingleImageUploader onChange={setImage} /> */}
+          <SingleImageUploader onChange={setImage} />
         </Form>
         {/* dialog footer  here*/}
         <DialogFooter>
           <DialogClose asChild>
             <Button variant="outline">Cancel</Button>
           </DialogClose>
-          <Button disabled={!image} type="submit" form="add-division">
+          <Button
+           disabled={!image} 
+           type="submit" form="add-division">
             Save changes
           </Button>
         </DialogFooter>
