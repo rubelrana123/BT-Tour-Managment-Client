@@ -28,8 +28,11 @@ export function LoginForm({
   const form = useForm({
     //! For development onlyf
     defaultValues: {
-      email: "rubelrana.dev@gmail.com",
-      password: "Pa$$w0rd!",
+      // email: "rubelrana.dev@gmail.com",
+      // password: "Pa$$w0rd!",
+      email : "admin@gmail.com",
+      password: "12345678",
+
     },
   });
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {

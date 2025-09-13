@@ -23,17 +23,17 @@ export const adminSidebarItems : ISliderItem[] = [
         url: "/admin/add-tour-type",
         Component: AddTourType,
       },
-
-      {
-        title: "Add Tour",
-        url: "/admin/add-tour",
-        Component: AddTour,
-      },
             {
         title: "Add Division",
         url: "/admin/add-division",
         Component: AddDivision,
       },
+      {
+        title: "Add Tour",
+        url: "/admin/add-tour",
+        Component: AddTour,
+      },
+ 
     ],
   },
 ];
