@@ -1,4 +1,5 @@
 // import MultipleImageUploader from "@/components/MultipleImageUploader";
+import MultipleImageUploader from "@/components/MultipleImageUploader";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -32,18 +33,21 @@ import {
 } from "@/components/ui/select";
 
 import { Textarea } from "@/components/ui/textarea";
+import type { FileMetadata } from "@/hooks/use-file-upload";
 // import { FileMetadata } from "@/hooks/use-file-upload";
 import { cn } from "@/lib/utils";
 import { useGetDivisionsQuery } from "@/redux/features/division/division.api";
 import {
   useAddTourMutation,
   useGetTourTypesQuery,
+ 
 } from "@/redux/features/tour/tour.api";
 import type { IErrorResponse } from "@/types";
  
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format, formatISO } from "date-fns";
 import { CalendarIcon, Plus, Trash2 } from "lucide-react";
+import { useState } from "react";
  
 
 import { useFieldArray, useForm } from "react-hook-form";
@@ -70,13 +74,14 @@ const formSchema = z.object({
 });
 
 export default function AddTour() {
-  // const [images, setImages] = useState<(File | FileMetadata)[] | []>([]);
+  const [images, setImages] = useState<(File | FileMetadata)[] | []>([]);
 
   const { data: divisionData, isLoading: divisionLoading } =
     useGetDivisionsQuery(undefined);
   const { data: tourTypeData } = useGetTourTypesQuery(undefined);
   const [addTour] = useAddTourMutation();
-
+ 
+console.log("gettourtype", tourTypeData)
   const divisionOptions = divisionData?.map(
     (item: { _id: string; name: string }) => ({
       value: item._id,
@@ -84,13 +89,13 @@ export default function AddTour() {
     })
   );
 
-  const tourTypeOptions = tourTypeData?.data?.map(
+  const tourTypeOptions = tourTypeData?.map(
     (tourType: { _id: string; name: string }) => ({
       value: tourType._id,
       label: tourType.name,
     })
   );
-
+  console.log(tourTypeOptions, "tourtypeoptions")
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -171,10 +176,10 @@ export default function AddTour() {
   const handleSubmit = async (data: z.infer<typeof formSchema>) => {
     const toastId = toast.loading("Creating tour....");
 
-    // if (images?.length === 0) {
-    //   toast.error("Please add some images", { id: toastId });
-    //   return;
-    // }
+    if (images?.length === 0) {
+      toast.error("Please add some images", { id: toastId });
+      return;
+    }
 
     const tourData = {
       ...data,
@@ -204,11 +209,11 @@ export default function AddTour() {
     const formData = new FormData();
 
     formData.append("data", JSON.stringify(tourData));
-    // images.forEach((image) => formData.append("files", image as File));
+    images.forEach((image) => formData.append("files", image as File));
 
     try {
       const res = await addTour(formData).unwrap();
-
+      console.log("add tour response", res);
       if (res.success) {
         toast.success("Tour created", { id: toastId });
         form.reset();
@@ -505,7 +510,7 @@ export default function AddTour() {
                   )}
                 />
                 <div className="flex-1 mt-5">
-                  {/* <MultipleImageUploader onChange={setImages} /> */}
+                  <MultipleImageUploader onChange={setImages} />
                 </div>
               </div>
               <div className="border-t border-muted w-full "></div>

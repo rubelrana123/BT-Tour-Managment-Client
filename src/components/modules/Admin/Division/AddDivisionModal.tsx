@@ -50,9 +50,11 @@ export function AddDivisionModal() {
     console.log(formData.get("file"));
 
     try {
+     const toastId = toast.loading("create Division......");
+      
      const res = await addDivision(formData).unwrap();
-     console.log(res)
-      toast.success("Division Added");
+     console.log("after added division", res);
+      toast.success("Division Added",{ id: toastId });
       setOpen(false);
     } catch (err) {
       console.error(err);
